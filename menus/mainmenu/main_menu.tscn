@@ -2,6 +2,25 @@
 
 [ext_resource type="Script" uid="uid://chnl6kn31k57n" path="res://menus/mainmenu/main_menu.gd" id="1_sb2ai"]
 
+[sub_resource type="Gradient" id="Gradient_sb2ai"]
+offsets = PackedFloat32Array(0.006024096, 1)
+colors = PackedColorArray(0.17283279, 0.17283264, 0.17283261, 1, 0.22670761, 0.22670746, 0.22670746, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_5tvgh"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_n5mbg"]
+noise = SubResource("FastNoiseLite_5tvgh")
+color_ramp = SubResource("Gradient_sb2ai")
+
+[sub_resource type="LabelSettings" id="LabelSettings_77jgo"]
+font_size = 42
+font_color = Color(0.0701452, 0.30794674, 1, 1)
+outline_size = 5
+outline_color = Color(0.49885875, 0.51553106, 1, 1)
+shadow_size = 7
+shadow_color = Color(0, 0, 0, 0.4117647)
+shadow_offset = Vector2(6, 6)
+
 [node name="MainMenu" type="Control" unique_id=899233963]
 layout_mode = 3
 anchors_preset = 15
@@ -10,3 +29,62 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_sb2ai")
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=923780053]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("NoiseTexture2D_n5mbg")
+
+[node name="MarginContainer" type="MarginContainer" parent="TextureRect" unique_id=2086767920]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TextureRect/MarginContainer" unique_id=1489431975]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Spacer" type="Control" parent="TextureRect/MarginContainer/VBoxContainer" unique_id=2015015829]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+
+[node name="Title_Label" type="Label" parent="TextureRect/MarginContainer/VBoxContainer" unique_id=1106687223]
+layout_mode = 2
+text = "Captain Sharpe"
+label_settings = SubResource("LabelSettings_77jgo")
+
+[node name="Spacer2" type="Control" parent="TextureRect/MarginContainer/VBoxContainer" unique_id=171142725]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+
+[node name="StartBtn" type="Button" parent="TextureRect/MarginContainer/VBoxContainer" unique_id=1643074331]
+layout_mode = 2
+text = "Start"
+
+[node name="SettingsBtn" type="Button" parent="TextureRect/MarginContainer/VBoxContainer" unique_id=276239095]
+layout_mode = 2
+text = "Settings"
+
+[node name="Spacer3" type="Control" parent="TextureRect/MarginContainer/VBoxContainer" unique_id=1296150148]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+
+[node name="ExitBtn" type="Button" parent="TextureRect/MarginContainer/VBoxContainer" unique_id=1990799539]
+layout_mode = 2
+text = "Exit"
+
+[connection signal="pressed" from="TextureRect/MarginContainer/VBoxContainer/StartBtn" to="." method="_on_start_btn_pressed"]
+[connection signal="pressed" from="TextureRect/MarginContainer/VBoxContainer/SettingsBtn" to="." method="_on_settings_btn_pressed"]
+[connection signal="pressed" from="TextureRect/MarginContainer/VBoxContainer/ExitBtn" to="." method="_on_exit_btn_pressed"]

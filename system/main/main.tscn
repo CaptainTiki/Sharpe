@@ -8,12 +8,12 @@
 [node name="Main" type="Node2D" unique_id=1602565906]
 script = ExtResource("1_e8aaf")
 
-[node name="MenuManager" parent="." unique_id=1922415620 instance=ExtResource("2_w8du4")]
-unique_name_in_owner = true
-
 [node name="GameManager" parent="." unique_id=165302841 instance=ExtResource("3_og20q")]
 unique_name_in_owner = true
 
+[node name="DataManager" parent="." unique_id=61421414 instance=ExtResource("4_og20q")]
+
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=517905727]
 
-[node name="DataManager" parent="." unique_id=61421414 instance=ExtResource("4_og20q")]
+[node name="MenuManager" parent="CanvasLayer" unique_id=1922415620 instance=ExtResource("2_w8du4")]
+unique_name_in_owner = true
