@@ -5,7 +5,7 @@ static var instance : GameManager = null
 
 @onready var data_manager = $"../DataManager"  # Adjust path if needed
 
-var current_level: Node = null
+var current_level: Level = null
 var current_level_scene : PackedScene = null
 var current_level_name: String = ""
 
@@ -25,6 +25,7 @@ func load_level(level_scene: PackedScene) -> void:
 		current_level = level_scene.instantiate()
 		add_child.call_deferred(current_level)
 		current_level_name = current_level.name.to_lower()
+		current_level.player_died.connect(_on_player_death)
 		data_manager.reset_level_data(current_level_name)
 		
 		# Find player spawn in the level and connect signals if needed

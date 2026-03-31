@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://bvj5aliuf1ebt"]
+
+[ext_resource type="Script" uid="uid://dlmkv8rixvq3d" path="res://player/dart/dart.gd" id="1_w2yu5"]
+
+[node name="Dart" type="Node2D" unique_id=907491013]
+script = ExtResource("1_w2yu5")

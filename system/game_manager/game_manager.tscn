@@ -1,6 +1,15 @@
 [gd_scene format=3 uid="uid://dd1k1r6m30uy0"]
 
 [ext_resource type="Script" uid="uid://tyknnljfki0t" path="res://system/game_manager/game_manager.gd" id="1_8rmxp"]
+[ext_resource type="PackedScene" uid="uid://c5tirgg4qjpaf" path="res://player/player.tscn" id="2_x8cvp"]
 
 [node name="GameManager" type="Node2D" unique_id=165302841]
 script = ExtResource("1_8rmxp")
+
+[node name="Player" parent="." unique_id=1816323784 instance=ExtResource("2_x8cvp")]
+speed = null
+jump_velocity = null
+gravity = null
+coyote_time = null
+jump_buffer_time = null
+dart_reload_time = null

@@ -1,0 +1,58 @@
+[gd_scene format=3 uid="uid://c5tirgg4qjpaf"]
+
+[ext_resource type="Script" uid="uid://cw7qom1emjbqt" path="res://player/player.gd" id="1_oul6g"]
+[ext_resource type="Texture2D" uid="uid://dphk85x5g0y7x" path="res://assets/sprites/ROBO WITH HANDS.png" id="2_rkbax"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_oul6g"]
+height = 22.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g1dw6"]
+atlas = ExtResource("2_rkbax")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yw30f"]
+atlas = ExtResource("2_rkbax")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qjkh3"]
+atlas = ExtResource("2_rkbax")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g6k8r"]
+atlas = ExtResource("2_rkbax")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_oul6g"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g1dw6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yw30f")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qjkh3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g6k8r")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}]
+
+[node name="Player" type="CharacterBody2D" unique_id=1790004803]
+script = ExtResource("1_oul6g")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1422293338]
+position = Vector2(0, -11)
+shape = SubResource("CapsuleShape2D_oul6g")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1611908823]
+texture_filter = 1
+position = Vector2(0, -16)
+sprite_frames = SubResource("SpriteFrames_oul6g")
+animation = &"idle"
+autoplay = "idle"
+frame_progress = 0.9373316
