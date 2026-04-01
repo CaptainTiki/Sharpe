@@ -40,6 +40,11 @@ var slide_timer: float = 0.0
 var wall_coyote_timer: float = 0.0
 var last_wall_normal: Vector2 = Vector2.ZERO
 var wall_jump_lock_timer: float = 0.0
+var is_shooting: bool = false
+var shoot_anim_timer: float = 0.0
+var is_dead: bool = false
+
+const SHOOT_ANIM_DURATION := 0.25
 
 func _ready() -> void:
 	dart_scene = Prefabs.dart_scene
@@ -120,6 +125,12 @@ func _physics_process(delta: float) -> void:
 
 	move_and_slide()
 
+	# --- Shoot anim timer ---
+	if shoot_anim_timer > 0.0:
+		shoot_anim_timer -= delta
+		if shoot_anim_timer <= 0.0:
+			is_shooting = false
+
 	# --- Dart gun ---
 	if Input.is_action_just_pressed("shoot") and can_shoot:
 		_fire_dart()
@@ -127,12 +138,37 @@ func _physics_process(delta: float) -> void:
 		await get_tree().create_timer(dart_reload_time).timeout
 		can_shoot = true
 
+	_update_animation()
+
 func _fire_dart() -> void:
 	var dart = dart_scene.instantiate()
 	dart.global_position = global_position + Vector2(14 if facing_right else -14, -6)
 	dart.direction = 1 if facing_right else -1
 	get_parent().add_child(dart)
-	# TODO: play shoot animation on sprite
+	is_shooting = true
+	shoot_anim_timer = SHOOT_ANIM_DURATION
+
+func _update_animation() -> void:
+	var anim: String
+	if is_dead:
+		anim = "die"
+	elif is_sliding:
+		anim = "slide"
+	elif is_on_wall() and not is_on_floor() and velocity.y > 0:
+		anim = "wall_slide"
+	elif not is_on_floor():
+		anim = "jump"
+	elif is_shooting and abs(velocity.x) > 10.0:
+		anim = "run_shoot"
+	elif is_shooting:
+		anim = "shoot"
+	elif abs(velocity.x) > 10.0:
+		anim = "run"
+	else:
+		anim = "idle"
+
+	if sprite.animation != anim:
+		sprite.play(anim)
 
 func _set_crouch_collider(crouching: bool) -> void:
 	var shape := collision_shape.shape as CapsuleShape2D
@@ -152,4 +188,5 @@ func take_damage(amount: int = 1) -> void:
 
 # Call this from GameManager on death
 func die() -> void:
+	is_dead = true
 	queue_free()

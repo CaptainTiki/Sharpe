@@ -1,6 +1,21 @@
 [gd_scene format=3 uid="uid://bvj5aliuf1ebt"]
 
 [ext_resource type="Script" uid="uid://dlmkv8rixvq3d" path="res://player/dart/dart.gd" id="1_w2yu5"]
+[ext_resource type="Texture2D" uid="uid://dphk85x5g0y7x" path="res://assets/sprites/ROBO WITH HANDS.png" id="2_bfayw"]
 
-[node name="Dart" type="Node2D" unique_id=907491013]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_sa2lo"]
+size = Vector2(6, 1)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rod2e"]
+atlas = ExtResource("2_bfayw")
+region = Rect2(78.05288, 243.59177, 6.756531, 1.7566833)
+
+[node name="Dart" type="Area2D" unique_id=1477238842]
 script = ExtResource("1_w2yu5")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1525621295]
+position = Vector2(0, -1)
+shape = SubResource("RectangleShape2D_sa2lo")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=545982061]
+texture = SubResource("AtlasTexture_rod2e")

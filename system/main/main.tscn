@@ -16,7 +16,7 @@ unique_name_in_owner = true
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=517905727]
 
-[node name="HUD" parent="CanvasLayer" instance=ExtResource("5_hud")]
+[node name="HUD" parent="CanvasLayer" unique_id=1454282977 instance=ExtResource("5_hud")]
 
 [node name="MenuManager" parent="CanvasLayer" unique_id=1922415620 instance=ExtResource("2_w8du4")]
 unique_name_in_owner = true
