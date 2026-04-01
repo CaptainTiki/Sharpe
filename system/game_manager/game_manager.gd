@@ -19,7 +19,7 @@ func start_game() -> void:
 func load_level(level_scene: PackedScene) -> void:
 	if current_level:
 		current_level.queue_free()
-	
+
 	if level_scene:
 		current_level_scene = level_scene
 		current_level = level_scene.instantiate()
@@ -27,11 +27,18 @@ func load_level(level_scene: PackedScene) -> void:
 		current_level_name = current_level.name.to_lower()
 		current_level.player_died.connect(_on_player_death)
 		data_manager.reset_level_data(current_level_name)
-		
-		# Find player spawn in the level and connect signals if needed
-		var player = current_level.get_node_or_null("Player")  # or use a Spawn node
+
+		var player: Player = current_level.get_node_or_null("Player")
 		if player:
-			player.connect("death", _on_player_death)  # We'll add this later
+			player.died.connect(_on_player_death)
+			HUD.instance.connect_player(player)
+
+		HUD.instance.setup_level(
+			current_level.level_display_name,
+			current_level.level_number,
+			current_level.orb_count
+		)
+		HUD.instance.show_hud()
 
 func _on_player_death() -> void:
 	# Instant respawn or reload current level with timer reset

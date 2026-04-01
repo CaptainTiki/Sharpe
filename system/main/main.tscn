@@ -4,6 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://ch5ac7nas0dsc" path="res://system/menu_manager/menu_manager.tscn" id="2_w8du4"]
 [ext_resource type="PackedScene" uid="uid://dd1k1r6m30uy0" path="res://system/game_manager/game_manager.tscn" id="3_og20q"]
 [ext_resource type="PackedScene" uid="uid://dmx6y466cwk0" path="res://system/data_manager/data_manager.tscn" id="4_og20q"]
+[ext_resource type="PackedScene" path="res://menus/hud/hud.tscn" id="5_hud"]
 
 [node name="Main" type="Node2D" unique_id=1602565906]
 script = ExtResource("1_e8aaf")
@@ -14,6 +15,8 @@ unique_name_in_owner = true
 [node name="DataManager" parent="." unique_id=61421414 instance=ExtResource("4_og20q")]
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=517905727]
+
+[node name="HUD" parent="CanvasLayer" instance=ExtResource("5_hud")]
 
 [node name="MenuManager" parent="CanvasLayer" unique_id=1922415620 instance=ExtResource("2_w8du4")]
 unique_name_in_owner = true
