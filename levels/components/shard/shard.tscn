@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://shard001"]
+
+[ext_resource type="Script" uid="uid://d3p27looki6bh" path="res://levels/components/shard/shard.gd" id="1_shard"]
+[ext_resource type="Texture2D" uid="uid://boca24d0hyl4d" path="res://assets/sprites/pickups_by_mtk.png" id="2_8gqxp"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_shard"]
+radius = 6.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6q17k"]
+atlas = ExtResource("2_8gqxp")
+region = Rect2(21, 33, 6, 14)
+
+[node name="Shard" type="Area2D" unique_id=1972223052]
+script = ExtResource("1_shard")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=23666568]
+shape = SubResource("CircleShape2D_shard")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1852490277]
+texture = SubResource("AtlasTexture_6q17k")

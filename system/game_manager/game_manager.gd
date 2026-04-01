@@ -8,6 +8,7 @@ static var instance : GameManager = null
 var current_level: Level = null
 var current_level_scene : PackedScene = null
 var current_level_name: String = ""
+var shards_collected: int = 0
 
 func _ready() -> void:
 	instance = self
@@ -27,6 +28,7 @@ func load_level(level_scene: PackedScene) -> void:
 		current_level_name = current_level.name.to_lower()
 		current_level.player_died.connect(_on_player_death)
 		data_manager.reset_level_data(current_level_name)
+		shards_collected = 0
 
 		var player: Player = current_level.get_node_or_null("Player")
 		if player:
@@ -44,6 +46,11 @@ func _on_player_death() -> void:
 	# Instant respawn or reload current level with timer reset
 	if current_level_scene:
 		load_level(current_level_scene)
+
+func collect_shard() -> void:
+	shards_collected += 1
+	data_manager.add_orb(current_level_name)
+	HUD.instance.update_orbs(shards_collected)
 
 # Example exit handler — call this from level's exit Area2D
 func handle_level_exit(next_level_scene: PackedScene) -> void:
